@@ -25,7 +25,7 @@ namespace CustomSounds.Patchers
 
             // Reset the pitch from Random to One
             // Voicelines are still pitchshifted, even with this line
-            // sampleGroup.pitch = new IAudioPitch(new AudioOnePitch().Pointer);
+            sampleGroup.pitch = new IAudioPitch(new AudioOnePitch().Pointer);
 
             CustomSounds.Log.Log(LogLevel.Debug, $"Now playing '{sampleGroup.id}' using key '{key}'");
 
