@@ -23,9 +23,6 @@ namespace CustomSounds.Patchers
             if (replacementSounds.Any())
                 sampleGroup.clips = replacementSounds.ToArray();
 
-
-            CustomSounds.Log.Log(LogLevel.Message, $"Now playing '{sampleGroup.id}'. Count: {sampleGroup.clips.Count}");
-
             // Reset the pitch from Random to One
             // Voicelines are still pitchshifted, even with this line
             // sampleGroup.pitch = new IAudioPitch(new AudioOnePitch().Pointer);

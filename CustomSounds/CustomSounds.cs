@@ -16,7 +16,7 @@ namespace CustomSounds
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     public class CustomSounds : BasePlugin
     {
-        public static new ManualLogSource Log;
+        public new static ManualLogSource Log;
         public static Dictionary<string, List<AudioSampleClip>> CustomSoundsReplace;
 
         public override void Load()
@@ -52,17 +52,18 @@ namespace CustomSounds
                 foreach (var filePath in wavFiles)
                 {
                     Log.Log(LogLevel.Debug, $"Processing file {filePath}");
-                    
+
                     var fileKey = GetSoundKey(Path.GetFileNameWithoutExtension(filePath));
 
                     var audioClip = LoadAudioClipFromWav(filePath, fileKey);
 
                     if (!result.ContainsKey(fileKey))
                     {
-                        Log.Log(LogLevel.Debug, $"Added new key '{fileKey}'");
+                        Log.Log(LogLevel.Message, $"Added new key '{fileKey}'");
                         result.Add(fileKey, new List<AudioSampleClip>());
                     }
 
+                    Log.Log(LogLevel.Info, $"Linked file '{filePath}' to key '{fileKey}'");
                     result[fileKey].Add(audioClip);
                 }
 
@@ -93,7 +94,7 @@ namespace CustomSounds
             var audioClip = AudioClip.Create(key, bytesRead, audioFile.WaveFormat.Channels, audioFile.WaveFormat.SampleRate, false);
             audioClip.SetData(audioData, 0);
 
-            return new AudioSampleClip() {clip = audioClip};
+            return new AudioSampleClip() { clip = audioClip };
         }
     }
 }
